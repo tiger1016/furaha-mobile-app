@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/es/integration/react';
 import r from './store';
+import Config from "react-native-config";
 
 const HeartIcon = (props) => <Icon {...props} name="heart" />;
 
@@ -14,7 +15,7 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <Layout style={styles.container}>
           <Text style={styles.text} category="h1">
-            Welcome to UI Kitten 😻
+            Welcome to {Config.API_URL}
           </Text>
           <Text style={styles.text} category="s1">
             Start with editing App.js to configure your App

@@ -11,7 +11,7 @@ export default () => (
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider
       {...eva}
-      theme={{...eva.light, ...theme}}
+      theme={{...eva.dark, ...theme}}
       customMapping={mapping}>
       <App />
     </ApplicationProvider>
