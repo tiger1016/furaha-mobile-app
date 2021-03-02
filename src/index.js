@@ -1,32 +1,25 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {Button, Layout, Text, Icon} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/es/integration/react';
 import r from './store';
-import Config from "react-native-config";
+import { NavigationContainer } from '@react-navigation/native';
+import { HomeScreen } from './screens/home';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const HeartIcon = (props) => <Icon {...props} name="heart" />;
+const Stack = createStackNavigator();
 
 const {store, persistor} = r;
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Layout style={styles.container}>
-          <Text style={styles.text} category="h1">
-            Welcome to {Config.API_URL}
-          </Text>
-          <Text style={styles.text} category="s1">
-            Start with editing App.js to configure your App
-          </Text>
-          <Text style={styles.text} appearance="hint">
-            For example, try changing theme to Dark by using eva.dark
-          </Text>
-          <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
-            LIKE
-          </Button>
-        </Layout>
+          <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={HomeScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
       </PersistGate>
     </Provider>
   );

@@ -6,6 +6,10 @@ import theme from './src/theme/theme.json';
 import mapping from './src/theme/mapping.json';
 import App from './src';
 
+import { enableScreens } from 'react-native-screens';
+
+enableScreens();
+
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
