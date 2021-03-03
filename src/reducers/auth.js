@@ -1,4 +1,5 @@
-import actions from '../store/actions';
+import ActionTypes from '../store/actions';
+import objectAssign from 'object-assign';
 
 const initialState = {
   waiting: true,
@@ -9,26 +10,23 @@ const initialState = {
 
 export default (state = initialState, {type, payload}) => {
   switch (type) {
-    case actions.LOGIN:
-      return {
-        ...state,
+    case ActionTypes.LOGIN:
+      return objectAssign({}, state, {
         waiting: true,
-      };
-    case actions.LOGGED_IN:
-      return {
-        ...state,
+      });
+    case ActionTypes.LOGGED_IN:
+      return objectAssign({}, state, {
         state: payload.state,
         user: payload.user,
         waiting: false,
         tokenSet: true,
-      };
-    case actions.LOGOUT:
-      return {
-        ...state,
+      });
+    case ActionTypes.LOGOUT:
+      return objectAssign({}, state, {
         user: {},
         tokenSet: false,
         waiting: true,
-      };
+      });
     default:
       return state;
   }

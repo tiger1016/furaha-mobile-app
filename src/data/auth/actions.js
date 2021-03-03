@@ -5,7 +5,7 @@ import * as sharedActions from '../../data/shared/actions';
 import r from '../../store';
 import analytics from '@react-native-firebase/analytics';
 import SInfo from 'react-native-sensitive-info';
-import actions from '../../store/actions';
+import ActionTypes from '../../store/actions';
 import branch from 'react-native-branch';
 import Intercom from 'react-native-intercom';
 
@@ -13,31 +13,31 @@ const {store, persistor} = r;
 const actionsCreator = {
   authLogin: (payload) => {
     return {
-      type: actions.LOGIN,
+      type: ActionTypes.LOGIN,
       payload: payload,
     };
   },
   authLogged: (payload) => {
     return {
-      type: actions.LOGGED_IN,
+      type: ActionTypes.LOGGED_IN,
       payload: payload,
     };
   },
   personUpdate: (payload) => {
     return {
-      type: actions.PERSON_UPDATE,
+      type: ActionTypes.PERSON_UPDATE,
       payload: payload,
     };
   },
   authRegister: (payload) => {
     return {
-      type: actions.REGISTER,
+      type: ActionTypes.REGISTER,
       payload: payload,
     };
   },
   authLogout: (payload) => {
     return {
-      type: actions.LOGOUT,
+      type: ActionTypes.LOGOUT,
       payload: payload,
     };
   },
