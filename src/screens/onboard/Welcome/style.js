@@ -1,23 +1,24 @@
-import {StyleService} from '@ui-kitten/components';
+import {StyleService, useStyleSheet} from '@ui-kitten/components';
 
-import {Dimensions, Platform} from 'react-native';
+import {Dimensions, Platform, StyleSheet} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleService.create({
   outContainer: {
     flex: 1,
-    backgroundColor: 'color-warning-500',
+    ...StyleSheet.absoluteFill,
   },
   innerContainer: {
-    borderBottomRightRadius: 250,
+    borderTopRightRadius: 150,
     backgroundColor: '#FFF',
+    height: height / 2,
+    top: height / 2,
     flex: 1,
     justifyContent: 'space-between',
     paddingBottom: 20,
   },
   textContainer: {
-    paddingTop: height / 2,
     paddingHorizontal: 55,
     backgroundColor: 'transparent',
   },

@@ -18,7 +18,7 @@ export default {
     'text-heading-1-font-weight': '800',
     'text-heading-1-font-family': 'OpenSans-Bold',
 
-    'text-heading-2-font-size': actuatedNormalize(18),
+    'text-heading-2-font-size': actuatedNormalize(16),
     'text-heading-2-font-weight': '800',
     'text-heading-2-font-family': 'OpenSans-Bold',
 

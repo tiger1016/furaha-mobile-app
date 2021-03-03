@@ -8,8 +8,16 @@ import objectAssign from 'object-assign';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as LayoutActions from './data/layout/actions';
 import Landing from './screens/onboard/Landing';
+import BookingStep from './screens/onboard/Landing/BookingStep';
+import SocialStep from './screens/onboard/Landing/SocialStep';
+import VirtualStep from './screens/onboard/Landing/VirtualStep';
+import Welcome from './screens/onboard/Welcome';
+import Login from './screens/onboard/Login';
+import Register1 from './screens/onboard/Register1';
+import Register2 from './screens/onboard/Register2';
+import Register3 from './screens/onboard/Register3';
 
-const Root = ({actions, waiting}) => {
+const Root = ({actions, waiting, ...props}) => {
   useEffect(() => {
     if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental &&
@@ -33,27 +41,24 @@ const Root = ({actions, waiting}) => {
           textStyle={{color: '#FFF'}}
           visible={!waiting}
         />
-        <Switch style={{flex: 1}}>
-          <Route exact path="/" component={Landing} />
-          {/* <Route path="/onboarding/service/step1" component={Service1} />
-          <Route path="/onboarding/service/step2" component={Service2} />
-          <Route path="/onboarding/service/step3" component={Service3} />
-          <Route path="/onboarding/service/start" component={GetStarted} />
-          <Route path="/onboarding/service/invite" component={Invite} />
-          <Route path="/onboarding/welcome" component={Welcome} />
-          <Route path="/onboarding/login" component={Login} />
-          <Route path="/onboarding/register/step1" component={Register1} />
-          <Route path="/onboarding/register/step2" component={Register2} />
-          <Route path="/onboarding/register/step3" component={Register3} />
-          <Route path="/onboarding/profile/chooserole" component={AddRole} />
-          <Route path="/onboarding/profile/photo" component={AddPhoto} />
-          <Route path="/onboarding/profile/interest" component={AddInterest} />
-          <Route path="/onboarding/profile/biobrief" component={AddBioBrief} />
-          <Route path="/onboarding/profile/username" component={AddUserName} />
-          <Route path="/onboarding/profile/finish" component={ProfileFinish} />
-          <Route path="/onboarding/social" component={Social} />
-          <Route path="/onboarding/social/go" component={onBoarding} /> */}
-        </Switch>
+        <Route exact path={'/'} component={Landing} />
+        <Route exact path={'/step1'} component={BookingStep} />
+        <Route exact path={'/step2'} component={SocialStep} />
+        <Route exact path={'/step3'} component={VirtualStep} />
+        <Route exact path={'/welcome'} component={Welcome} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register1} />
+        <Route path="/register/step1" component={Register2} />
+        <Route path="/register/step2" component={Register3} />
+
+        {/* <Route path="/onboarding" component={OnBoarding} />
+        <Route path="/onboarding/photo" component={AddPhoto} />
+        <Route path="/onboarding/biobrief" component={AddBioBrief} />
+        <Route path="/onboarding/username" component={AddUserName} />
+        <Route path="/onboarding/interest" component={AddInterest} />
+
+        <Route path="/onboarding/invite" component={Invite} />
+        <Route path="/onboarding/lookfor" component={Lookfor} /> */}
       </Layout>
     </>
   );

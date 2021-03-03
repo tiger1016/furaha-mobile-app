@@ -4,9 +4,7 @@ import {connect} from 'react-redux';
 import themeStyles from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const HeartIcon = (props) => <Icon {...props} name="heart" />;
-
-const Landing = ({...props}) => {
+const BookingStep = ({...props}) => {
   const styles = useStyleSheet(themeStyles);
 
   return (
@@ -14,15 +12,27 @@ const Landing = ({...props}) => {
       <Layout style={styles.innerContainer}>
         <Layout style={styles.textContainer}>
           <Text style={styles.title} category="h5">
-            Furaha Services on the Go
+            New: Virtual Services
           </Text>
           <Text style={styles.content} category="p1">
-            Everything that you need to get to make you beautiful and amazing in
-            one app. Quick services on the go
+            Never miss out on your favorite bookies or shapers. Follow their
+            updates and get latest info
           </Text>
+          <Layout style={styles.skip}>
+            <Layout style={styles.skipContainer}>
+              <Layout style={styles.skipItemActive}></Layout>
+              <Layout style={styles.skipItemActive}></Layout>
+              <Layout style={styles.skipItemActive}></Layout>
+            </Layout>
+            <TouchableOpacity onPress={() => props.history.push('/welcome')}>
+              <Text category="p1" style={{textAlign: 'center'}}>
+                Skip
+              </Text>
+            </TouchableOpacity>
+          </Layout>
         </Layout>
         <TouchableOpacity
-          onPress={() => props.history.push('/step1')}
+          onPress={() => props.history.push('/welcome')}
           style={{alignItems: 'flex-end', paddingHorizontal: 10}}>
           <Icon name="chevron-right-outline" fill="white" style={styles.icon} />
         </TouchableOpacity>
@@ -37,4 +47,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps)(BookingStep);

@@ -1,11 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated} from 'react-native';
-import {withRouter} from 'react-router-native';
 import {connect} from 'react-redux';
 
-const Wrapper = ({width, direction, children}) => {
-  const x = useRef(new Animated.Value(direction === 'right' ? -width : width))
-    .current;
+const Wrapper = ({direction, children, ...props}) => {
+  const x = useRef(
+    new Animated.Value(direction === 'right' ? -props.width : props.width),
+  ).current;
+
   const slide = () => {
     Animated.spring(x, {
       toValue: 0,
@@ -33,4 +34,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(Wrapper));
+export default connect(mapStateToProps)(Wrapper);
