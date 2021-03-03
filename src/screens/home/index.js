@@ -4,7 +4,7 @@ import {Button, Layout, Text, Icon} from '@ui-kitten/components';
 
 const HeartIcon = (props) => <Icon {...props} name="heart" />;
 
-export const HomeScreen = () => {
+export const HomeScreen = ({form}) => {
   return (
     <Layout style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
