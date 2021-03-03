@@ -15,8 +15,8 @@ const Landing = ({}) => {
     // <Wrapper>
     <Layout style={styles.outContainer}>
       <Layout style={styles.innerContainer}>
-        <Text style={styles.text} category="h1">
-          Welcome to {Config.API_BASE}
+        <Text style={styles.text} category="h2">
+          Furaha Services on the Go
         </Text>
         <Text style={styles.text} category="s1">
           Start with editing App.js to configure your App

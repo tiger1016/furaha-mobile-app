@@ -3,10 +3,11 @@ import {StyleService} from '@ui-kitten/components';
 const styles = StyleService.create({
   outContainer: {
     flex: 1,
-    color: 'color-info-100',
+    backgroundColor: 'color-warning-500',
   },
   innerContainer: {
-    borderRadius: 20,
+    borderBottomRightRadius: 200,
+    backgroundColor: '#FFF',
     justifyContent: 'center',
     flex: 1,
   },
