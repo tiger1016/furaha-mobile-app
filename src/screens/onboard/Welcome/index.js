@@ -7,7 +7,12 @@ import {ImageBackground, Image} from 'react-native';
 
 const image = require('../../../assets/img/first.png');
 const StartIcon = (props) => (
-  <Icon {...props} name="people" style={{width: 30, height: 30}} />
+  <Icon
+    {...props}
+    pack="material"
+    name="people"
+    style={{width: 35, height: 35, color: '#fff'}}
+  />
 );
 
 const BookingStep = ({...props}) => {
@@ -27,7 +32,7 @@ const BookingStep = ({...props}) => {
           </Text>
         </Layout>
         <Layout style={{marginTop: 1}}>
-          <Text category="h6" style={{letterSpacing: 1}}>
+          <Text category="h6" style={{letterSpacing: 1, fontWeight: '700'}}>
             Welcome
           </Text>
           <Text category="p1" style={{letterSpacing: 0.48, marginTop: 10}}>
@@ -35,7 +40,7 @@ const BookingStep = ({...props}) => {
           </Text>
         </Layout>
         <Layout style={{marginTop: 20}}>
-          <Button size="giant" status="primary" style={styles.btn}>
+          <Button size="giant" status="primary">
             <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
               Login
             </Text>

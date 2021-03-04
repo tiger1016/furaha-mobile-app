@@ -7,7 +7,6 @@
 
 const MetroConfig = require('@ui-kitten/metro-config');
 const defaultConfig = require('metro-config/src/defaults').getDefaultValues();
-
 /**
  * @see https://akveo.github.io/react-native-ui-kitten/docs/guides/improving-performance
  */

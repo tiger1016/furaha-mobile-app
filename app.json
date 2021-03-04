@@ -1,4 +1,13 @@
 {
   "name": "shapeup",
-  "displayName": "shapeup"
+  "displayName": "shapeup",
+  "packagerOpts": {
+    "config": "metro.config.js",
+    "sourceExts": [
+      "js",
+      "jsx",
+      "json",
+      "svg"
+    ]
+  }
 }

@@ -12,6 +12,7 @@ const styles = StyleService.create({
   outContainer: {
     position: 'absolute',
     height: height / 2,
+    width: 100,
   },
   innerContainer: {
     borderTopRightRadius: 150,

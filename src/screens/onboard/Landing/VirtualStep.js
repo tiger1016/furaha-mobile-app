@@ -11,7 +11,7 @@ const BookingStep = ({...props}) => {
     <Layout style={styles.outContainer}>
       <Layout style={styles.innerContainer}>
         <Layout style={styles.textContainer}>
-          <Text style={styles.title} category="h5">
+          <Text style={styles.title} category="h6">
             New: Virtual Services
           </Text>
           <Text style={styles.content} category="p1">

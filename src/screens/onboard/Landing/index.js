@@ -13,7 +13,7 @@ const Landing = ({...props}) => {
     <Layout style={styles.outContainer}>
       <Layout style={styles.innerContainer}>
         <Layout style={styles.textContainer}>
-          <Text style={styles.title} category="h5">
+          <Text style={styles.title} category="h6">
             Furaha Services on the Go
           </Text>
           <Text style={styles.content} category="p1">
