@@ -7,24 +7,30 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleService.create({
   backContainer: {
     flex: 1,
-    backgroundColor: 'color-basic-800',
+    backgroundColor: 'color-basic-900',
   },
   outContainer: {
     position: 'absolute',
-    height: height / 2,
-    width: 100,
+    height: height,
+    width: width,
+    zIndex: 1,
   },
   innerContainer: {
-    borderTopRightRadius: 150,
+    borderTopRightRadius: 350,
     backgroundColor: '#FFF',
-    height: height / 2,
-    top: height / 2,
+    height: height / 2 + 50,
+    top: height / 2 - 50,
+    width: width + 80,
     justifyContent: 'space-between',
-    paddingBottom: 40,
+    paddingBottom: 50,
     paddingHorizontal: 40,
+    paddingRight: 120,
   },
   logoContainer: {
-    paddingTop: 70,
+    top: 10,
+    flex: 1,
+    height: 30,
+    width: '50%',
   },
   btn: {
     backgroundColor: 'color-basic-800',
