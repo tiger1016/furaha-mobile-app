@@ -75,8 +75,10 @@
   "color-danger-transparent-500": "rgba(255, 64, 50, 0.4)",
   "color-danger-transparent-600": "rgba(255, 64, 50, 0.48)",
 
-  "background-basic-color-1": "$color-basic-800",
-  "background-basic-color-2": "$color-basic-900",
-  "background-basic-color-3": "$color-basic-1000",
-  "background-basic-color-4": "$color-basic-1100"
+  "color-basic-transparent-000": "rgba(255, 255, 255, 0)",
+
+  "background-basic-color-1": "$color-basic-transparent-000",
+  "background-basic-color-2": "$color-basic-transparent-900",
+  "background-basic-color-3": "$color-basic-transparent-1000",
+  "background-basic-color-4": "$color-basic-transparent-1100"
 }

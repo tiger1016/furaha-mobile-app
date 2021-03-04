@@ -3,6 +3,7 @@ import {Button, Layout, Text, Icon, useStyleSheet} from '@ui-kitten/components';
 import {connect} from 'react-redux';
 import themeStyles from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Wrapper} from '../../global/screenwraper';
 
 const BookingStep = ({...props}) => {
   const styles = useStyleSheet(themeStyles);

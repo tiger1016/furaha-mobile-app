@@ -18,8 +18,7 @@ const styles = StyleService.create({
   },
   textContainer: {
     paddingTop: height / 2,
-    paddingHorizontal: 55,
-    backgroundColor: 'transparent',
+    paddingHorizontal: 45,
   },
   title: {
     textAlign: 'center',
@@ -32,7 +31,6 @@ const styles = StyleService.create({
     letterSpacing: 1,
   },
   skipContainer: {
-    backgroundColor: 'transparent',
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 40,
@@ -43,15 +41,13 @@ const styles = StyleService.create({
     height: 8,
     width: width / 6,
     borderRadius: 10,
+    backgroundColor: 'color-basic-900',
   },
   skipItemActive: {
     height: 8,
     width: width / 6,
     borderRadius: 10,
     backgroundColor: 'color-warning-500',
-  },
-  skip: {
-    backgroundColor: 'transparent',
   },
   icon: {
     width: 40,

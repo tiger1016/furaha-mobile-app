@@ -18,9 +18,13 @@ export default {
     'text-heading-1-font-weight': '800',
     'text-heading-1-font-family': 'OpenSans-Bold',
 
-    'text-heading-2-font-size': actuatedNormalize(16),
-    'text-heading-2-font-weight': '800',
-    'text-heading-2-font-family': 'OpenSans-Bold',
+    'text-heading-5-font-size': actuatedNormalize(24),
+    'text-heading-5-font-weight': '700',
+    'text-heading-5-font-family': 'OpenSans-Bold',
+
+    'text-heading-6-font-size': actuatedNormalize(22),
+    'text-heading-6-font-weight': '700',
+    'text-heading-6-font-family': 'OpenSans-Bold',
 
     'text-subtitle-1-font-size': actuatedNormalize(15),
     'text-subtitle-1-font-weight': '600',

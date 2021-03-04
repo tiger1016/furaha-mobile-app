@@ -5,18 +5,29 @@ import {Dimensions, Platform, StyleSheet} from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleService.create({
-  outContainer: {
+  backContainer: {
     flex: 1,
-    ...StyleSheet.absoluteFill,
+    backgroundColor: 'color-basic-800',
+  },
+  outContainer: {
+    position: 'absolute',
+    height: height / 2,
   },
   innerContainer: {
     borderTopRightRadius: 150,
     backgroundColor: '#FFF',
     height: height / 2,
     top: height / 2,
-    flex: 1,
     justifyContent: 'space-between',
-    paddingBottom: 20,
+    paddingBottom: 40,
+    paddingHorizontal: 40,
+  },
+  logoContainer: {
+    paddingTop: 70,
+  },
+  btn: {
+    backgroundColor: 'color-basic-800',
+    borderColor: 'color-basic-800',
   },
   textContainer: {
     paddingHorizontal: 55,
