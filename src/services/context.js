@@ -5,4 +5,4 @@ export const ThemeContext = React.createContext({
   toggleTheme: () => {},
 });
 
-export const useTheme = () => React.useContext(ThemeContext);
+export const useAppTheme = () => React.useContext(ThemeContext);
