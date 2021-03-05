@@ -7,7 +7,6 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleService.create({
   backContainer: {
     flex: 1,
-    backgroundColor: 'color-basic-900',
   },
   outContainer: {
     position: 'absolute',
@@ -18,12 +17,11 @@ const styles = StyleService.create({
     position: 'absolute',
     borderTopRightRadius: 350,
     backgroundColor: '#FFF',
-    height: height / 2 + 50,
     bottom: 0,
     width: width + 100,
     paddingBottom: 50,
     paddingHorizontal: 40,
-    paddingRight: 120,
+    paddingRight: 90,
     borderColor: '#00000012',
     borderWidth: 1,
     shadowColor: '#00000014',

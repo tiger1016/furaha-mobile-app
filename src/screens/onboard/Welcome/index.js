@@ -11,6 +11,8 @@ import {connect} from 'react-redux';
 import themeStyles from './style';
 import {Animated, Easing} from 'react-native';
 import {useAppTheme} from '../../../services/context';
+import Signin from '../Login';
+import Signup from '../Register1';
 
 const StartIcon = (props) => (
   <Icon
@@ -26,8 +28,9 @@ const logos = [
   require('../../../assets/img/logo-white.png'),
 ];
 
-const BookingStep = ({layout, ...props}) => {
+const Welcome = ({layout, ...props}) => {
   const [toggled, setToggled] = useState(false);
+  const [step, setStep] = useState('welcome');
 
   const styles = useStyleSheet(themeStyles);
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -160,37 +163,50 @@ const BookingStep = ({layout, ...props}) => {
             }}
           />
         </Animated.View>
-        <Layout style={[styles.desc, {marginTop: toggled ? 0 : 30}]}>
-          <Text category="h5" style={{letterSpacing: 1, fontWeight: '700'}}>
-            Welcome
-          </Text>
-          <Text category="p1" style={{letterSpacing: 0.48, marginTop: 10}}>
-            Find Artisians around you with ease on furaha app
-          </Text>
-        </Layout>
-        <Layout style={{marginTop: 40}}>
-          <Button
-            size="giant"
-            status="primary"
-            onPress={() => props.history.push('/login')}>
-            <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
-              Login
-            </Text>
-          </Button>
-          <Button
-            size="giant"
-            status="warning"
-            accessoryLeft={StartIcon}
-            onPress={() => {
-              setToggled(true);
-              animation(400);
-            }}
-            style={{paddingVertical: 0, marginTop: 15}}>
-            <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
-              Create an Account
-            </Text>
-          </Button>
-        </Layout>
+        {step === 'welcome' ? (
+          <Layout style={{marginRight: 50}}>
+            <Layout style={[styles.desc, {marginTop: toggled ? 0 : 30}]}>
+              <Text category="h5" style={{letterSpacing: 1, fontWeight: '700'}}>
+                Welcome
+              </Text>
+              <Text category="p1" style={{letterSpacing: 0.48, marginTop: 10}}>
+                Find Artisians around you with ease on furaha app
+              </Text>
+            </Layout>
+            <Layout style={{marginTop: 40}}>
+              <Button
+                size="giant"
+                status="primary"
+                onPress={() => {
+                  setToggled(true);
+                  setStep('signin');
+                  animation(400);
+                }}>
+                <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
+                  Login
+                </Text>
+              </Button>
+              <Button
+                size="giant"
+                status="warning"
+                accessoryLeft={StartIcon}
+                onPress={() => {
+                  setToggled(true);
+                  setStep('signup');
+                  animation(400);
+                }}
+                style={{paddingVertical: 0, marginTop: 15}}>
+                <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
+                  Create an Account
+                </Text>
+              </Button>
+            </Layout>
+          </Layout>
+        ) : step === 'signin' ? (
+          <Signin />
+        ) : (
+          <Signup />
+        )}
       </Animated.View>
     </Animated.View>
   );
@@ -202,4 +218,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(BookingStep);
+export default connect(mapStateToProps)(Welcome);

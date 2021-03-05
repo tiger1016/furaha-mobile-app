@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   Layout,
   Text,
   useStyleSheet,
   useTheme,
+  Input,
 } from '@ui-kitten/components';
 import {connect} from 'react-redux';
-import themeStyles from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Input from '../../global/input';
 
-const Login = ({layout, ...props}) => {
+const CustomInput = ({layout, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const evaTheme = useTheme();
 
@@ -21,7 +20,7 @@ const Login = ({layout, ...props}) => {
         Sign In
       </Text>
       <Layout style={{marginTop: 20}}>
-        {/* <Input
+        <Input
           placeholder="Email Address"
           style={{
             borderWidth: 0,
@@ -29,7 +28,7 @@ const Login = ({layout, ...props}) => {
             borderBottomColor: evaTheme['color-basic-500'],
           }}
         />
-        <Input placeholder="Password" /> */}
+        <Input placeholder="Password" />
         <Button
           size="giant"
           status="primary"
@@ -62,4 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(CustomInput);

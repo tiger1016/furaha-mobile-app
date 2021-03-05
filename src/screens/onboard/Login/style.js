@@ -1,48 +1,12 @@
-import {StyleService, useStyleSheet} from '@ui-kitten/components';
+import {StyleService} from '@ui-kitten/components';
 
-import {Dimensions, Platform, StyleSheet} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleService.create({
   backContainer: {
     flex: 1,
-  },
-  outContainer: {
-    position: 'absolute',
-    height: height / 3,
-    width: width,
-    zIndex: 1,
-  },
-  innerContainer: {
-    position: 'absolute',
-    borderTopRightRadius: 350,
-    backgroundColor: '#FFF',
-    height: (height * 2) / 3 - 70,
-    bottom: 0,
-    width: width + 80,
-    justifyContent: 'space-between',
-    paddingBottom: 50,
-    paddingHorizontal: 40,
-    paddingRight: 120,
-    borderColor: '#00000012',
-    borderWidth: 1,
-    shadowColor: '#00000014',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 4,
-  },
-  logoContainer: {
-    top: -50,
-    height: 35,
-    width: 110,
-  },
-  btn: {
-    backgroundColor: 'color-basic-800',
-    borderColor: 'color-basic-800',
   },
   textContainer: {
     paddingHorizontal: 55,
