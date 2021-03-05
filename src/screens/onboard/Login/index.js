@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   Layout,
@@ -15,21 +15,33 @@ const Login = ({layout, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const evaTheme = useTheme();
 
+  const [errors, setErrors] = useState({});
+
+  const changeEmail = (txt) => {
+    console.log(txt);
+  };
+
+  const changePassword = (txt) => {
+    console.log(txt);
+  };
+
   return (
     <Layout style={[styles.backContainer]}>
       <Text category="h3" style={{letterSpacing: 1}}>
         Sign In
       </Text>
       <Layout style={{marginTop: 20}}>
-        {/* <Input
+        <Input
           placeholder="Email Address"
-          style={{
-            borderWidth: 0,
-            borderColor: 'white',
-            borderBottomColor: evaTheme['color-basic-500'],
-          }}
+          error={errors.email}
+          onChangeText={changeEmail}
         />
-        <Input placeholder="Password" /> */}
+        <Input
+          type="password"
+          placeholder="Password"
+          error={errors.password}
+          onChangeText={changePassword}
+        />
         <Button
           size="giant"
           status="primary"
