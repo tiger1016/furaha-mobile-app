@@ -12,7 +12,7 @@ const defaultConfig = require('metro-config/src/defaults').getDefaultValues();
  */
 const evaConfig = {
   evaPackage: '@eva-design/eva',
-  customMappingPath: './src/theme/mapping.js',
+  // customMappingPath: './src/theme/mapping.js',
 };
 
 module.exports = MetroConfig.create(evaConfig, {

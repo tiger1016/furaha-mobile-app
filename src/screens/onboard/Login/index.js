@@ -7,9 +7,12 @@ import {
   useTheme,
 } from '@ui-kitten/components';
 import {connect} from 'react-redux';
-import themeStyles from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import * as yup from 'yup';
 import Input from '../../global/input';
+import themeStyles from './style';
+
+const emailSchema = yup.string().required('Required').email('Invalid Email!');
 
 const Login = ({layout, ...props}) => {
   const styles = useStyleSheet(themeStyles);
@@ -17,12 +20,17 @@ const Login = ({layout, ...props}) => {
 
   const [errors, setErrors] = useState({});
 
-  const changeEmail = (txt) => {
-    console.log(txt);
-  };
+  const changeEmail = (txt) => {};
 
   const changePassword = (txt) => {
     console.log(txt);
+  };
+
+  const login = () => {
+    // emailSchema
+    //   .validate(txt)
+    //   .then(() => [])
+    //   .catch(err);
   };
 
   return (
@@ -39,13 +47,13 @@ const Login = ({layout, ...props}) => {
         <Input
           type="password"
           placeholder="Password"
-          error={errors.password}
           onChangeText={changePassword}
         />
         <Button
           size="giant"
           status="primary"
-          style={{width: 150, marginTop: 20}}>
+          style={{width: 150, marginTop: 20}}
+          onPress={login}>
           <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
             Login
           </Text>

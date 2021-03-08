@@ -12,23 +12,27 @@ let defaultInstance = axios.create();
 const baseUrl = Config.API_URL;
 instance.defaults.baseURL = baseUrl;
 defaultInstance.defaults.baseURL = baseUrl;
-instance.interceptors.request.use(async function (config) {
+instance.interceptors.request.use(
+  async function (config) {
     // const httpMetric = perf().newHttpMetric(config.baseURL + config.url, config.method.toUpperCase());
     // config.metadata = { httpMetric };
     const accessToken = await SInfo.getItem('accessToken', {
-        sharedPreferencesName: 'authTokens',
-        keychainService: 'authTokens'
+      sharedPreferencesName: 'authTokens',
+      keychainService: 'authTokens',
     });
     config.headers.common['Authorization'] = `Bearer ${accessToken}`;
     config.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     //config.headers.common['x-app-locale'] = DeviceInfo.lo();
     config.headers.common['accept'] = 'application/json';
     return config;
-}, function (error) {
+  },
+  function (error) {
     // Do something with request error
     return Promise.reject(error);
-});
-instance.interceptors.response.use(function (response) {
+  },
+);
+instance.interceptors.response.use(
+  function (response) {
     // const { httpMetric } = response.config.metadata;
     //
     // // add any extra metric attributes if needed
@@ -38,66 +42,86 @@ instance.interceptors.response.use(function (response) {
     // httpMetric.setResponseContentType(response.headers['content-type']);
     // httpMetric.stop();
     return response.data;
-}, function (error) {
+  },
+  function (error) {
     if (error.response) {
-        // const { httpMetric } = error.config.metadata;
-        //
-        // // add any extra metric attributes if needed
-        // // httpMetric.putAttribute('userId', '12345678');
-        //
-        // httpMetric.setHttpResponseCode(error.response.status);
-        // httpMetric.setResponseContentType(error.response.headers['content-type']);
-        // httpMetric.stop();
-        if (error.response.status === 401) {
-            SInfo.deleteItem('accessToken', {
-                sharedPreferencesName: 'authTokens',
-                keychainService: 'authTokens'
-            }).then(() => {
-                NavigationActions.navigate('Auth', {reason: 'Bad Credentials', reasonCode: 401})
-            });
-        }
+      // const { httpMetric } = error.config.metadata;
+      //
+      // // add any extra metric attributes if needed
+      // // httpMetric.putAttribute('userId', '12345678');
+      //
+      // httpMetric.setHttpResponseCode(error.response.status);
+      // httpMetric.setResponseContentType(error.response.headers['content-type']);
+      // httpMetric.stop();
+      if (error.response.status === 401) {
+        SInfo.deleteItem('accessToken', {
+          sharedPreferencesName: 'authTokens',
+          keychainService: 'authTokens',
+        }).then(() => {
+          NavigationActions.navigate('Auth', {
+            reason: 'Bad Credentials',
+            reasonCode: 401,
+          });
+        });
+      }
     } else if (error.request) {
     } else {
     }
     return Promise.reject(error);
-
-});
-defaultInstance.interceptors.request.use(function (config) {
+  },
+);
+defaultInstance.interceptors.request.use(
+  function (config) {
     config.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     //config.headers.common['x-app-locale'] = DeviceInfo.getDeviceLocale();
     config.headers.common['accept'] = 'application/json';
     return config;
-}, function (error) {
+  },
+  function (error) {
     return Promise.reject(error);
-});
-defaultInstance.interceptors.response.use(function (response) {
+  },
+);
+defaultInstance.interceptors.response.use(
+  function (response) {
     return response.data;
-}, function (error) {
+  },
+  function (error) {
     return Promise.reject(error);
-});
+  },
+);
 
-export const plainFetch = (endPoint, payload = {}, method = 'get', headers = {}) => {
-    method = method.toLowerCase();
-    if (method === "get") {
-        return defaultInstance[method](endPoint, {
-            params: payload,
-            headers: headers
-        });
-    } else {
-        return defaultInstance[method](endPoint, payload, {headers: headers});
-    }
+export const plainFetch = (
+  endPoint,
+  payload = {},
+  method = 'get',
+  headers = {},
+) => {
+  method = method.toLowerCase();
+  if (method === 'get') {
+    return defaultInstance[method](endPoint, {
+      params: payload,
+      headers: headers,
+    });
+  } else {
+    return defaultInstance[method](endPoint, payload, {headers: headers});
+  }
 };
 
-export const fetchApi = (endPoint, payload = {}, method = 'get', headers = {}) => {
-    method = method.toLowerCase();
-    if (method === "get") {
-        return instance[method](endPoint, {
-            params: payload,
-            headers: headers
-        });
-    } else {
-        return instance[method](endPoint, payload, {headers: headers});
-    }
+export const fetchApi = (
+  endPoint,
+  payload = {},
+  method = 'get',
+  headers = {},
+) => {
+  method = method.toLowerCase();
+  if (method === 'get') {
+    return instance[method](endPoint, {
+      params: payload,
+      headers: headers,
+    });
+  } else {
+    return instance[method](endPoint, payload, {headers: headers});
+  }
 };
 
 // export const fetchDataApi = async (endPoint, payload, method = 'get') => {
