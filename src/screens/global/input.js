@@ -1,15 +1,6 @@
-import React, {useState} from 'src/screens/onboard/Register/node_modules/react';
-import {
-  Button,
-  Layout,
-  Text,
-  useStyleSheet,
-  useTheme,
-  Input,
-  Icon,
-} from '@ui-kitten/components';
-import {connect} from 'src/screens/onboard/Register/node_modules/react-redux';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import {Text, useTheme, Input, Icon} from '@ui-kitten/components';
+import {connect} from 'react-redux';
 
 const AlertIcon = (props) => {
   const evaTheme = useTheme();

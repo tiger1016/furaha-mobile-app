@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {Layout, Text, Avatar} from '@ui-kitten/components';
-import {Dimensions, UIManager, Platform, StatusBar, Image} from 'react-native';
+import {Layout} from '@ui-kitten/components';
+import {Dimensions, UIManager, Platform, StatusBar} from 'react-native';
 import {Switch, Route, withRouter} from 'react-router-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';

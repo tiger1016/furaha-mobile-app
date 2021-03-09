@@ -1,12 +1,8 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-} from 'src/screens/onboard/Register/node_modules/react';
+import React, {useEffect, useState, useRef} from 'react';
 import {useStyleSheet, useTheme} from '@ui-kitten/components';
-import {connect} from 'src/screens/onboard/Register/node_modules/react-redux';
+import {connect} from 'react-redux';
 import {Animated, Easing} from 'react-native';
-import {Switch, NativeRouter, Route, withRouter} from 'react-router-native';
+import {Switch, Route} from 'react-router-native';
 import {useAppTheme} from '../../../services/context';
 import themeStyles from './style';
 import Boarding from './Boarding';
@@ -177,4 +173,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(Welcome));
+export default connect(mapStateToProps)(Welcome);

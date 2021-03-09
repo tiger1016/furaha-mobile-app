@@ -22,6 +22,7 @@ const styles = StyleService.create({
   btnContainer: {
     marginTop: 15,
     flexDirection: 'row',
+    paddingRight: 10,
   },
 
   btn: {

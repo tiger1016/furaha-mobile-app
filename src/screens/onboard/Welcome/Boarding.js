@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Layout, Text, Icon, useStyleSheet} from '@ui-kitten/components';
-import themeStyles from './style';
 import {withRouter} from 'react-router-native';
+import themeStyles from './style';
 
 const StartIcon = (props) => (
   <Icon

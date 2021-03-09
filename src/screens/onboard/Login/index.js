@@ -1,4 +1,4 @@
-import React, {useState} from 'src/screens/onboard/Register/node_modules/react';
+import React, {useState} from 'react';
 import {
   Button,
   Layout,
@@ -6,8 +6,6 @@ import {
   useStyleSheet,
   useTheme,
 } from '@ui-kitten/components';
-import {connect} from 'src/screens/onboard/Register/node_modules/react-redux';
-import {withRouter} from 'react-router-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import Input from '../../global/input';
@@ -16,7 +14,7 @@ import {actuatedNormalize} from '../../../theme/mapping';
 
 const emailSchema = yup.string().required('Required').email('Invalid Email!');
 
-const Login = ({layout, ...props}) => {
+const Login = ({...props}) => {
   const styles = useStyleSheet(themeStyles);
   const evaTheme = useTheme();
 
@@ -80,10 +78,4 @@ const Login = ({layout, ...props}) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    layout: state.layout,
-  };
-}
-
-export default withRouter(connect(mapStateToProps)(Login));
+export default Login;

@@ -1,10 +1,9 @@
 import React from 'react';
-import {Button, Layout, Text, Icon, useStyleSheet} from '@ui-kitten/components';
-import {connect} from 'react-redux';
+import {Layout, Text, Icon, useStyleSheet} from '@ui-kitten/components';
 import themeStyles from './style';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const BookingStep = ({...props}) => {
+const VirtualStep = ({...props}) => {
   const styles = useStyleSheet(themeStyles);
 
   return (
@@ -41,10 +40,4 @@ const BookingStep = ({...props}) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    width: state.layout.width,
-  };
-}
-
-export default connect(mapStateToProps)(BookingStep);
+export default VirtualStep;

@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
-  Button,
   Layout,
   Text,
   Icon,
   useStyleSheet,
   useTheme,
+  Button,
 } from '@ui-kitten/components';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import Input from '../../global/input';
@@ -23,11 +21,52 @@ const schema = yup.object().shape({
     .min(2, 'Should be at least 2 characters'),
 });
 
-const Register1 = ({...props}) => {
+const formTemplate = [
+  [
+    {
+      placeholder: 'Full Name',
+      label: 'name',
+      value: '',
+    },
+    {
+      placeholder: 'Email Address',
+      label: 'email',
+      value: '',
+    },
+  ],
+  [
+    {
+      placeholder: '+41 Mobile Number',
+      label: 'phone',
+      value: '',
+    },
+    {
+      placeholder: 'Where did you get to find out Furaha',
+      label: 'findout',
+      value: '',
+    },
+  ],
+  [
+    {
+      placeholder: 'Password',
+      label: 'password',
+      value: '',
+    },
+    {
+      placeholder: 'Confirm Password',
+      label: 'confirm',
+      value: '',
+    },
+  ],
+];
+
+const Register = ({...props}) => {
   const styles = useStyleSheet(themeStyles);
+  const [step, setStep] = useState(0);
   const evaTheme = useTheme();
 
   const [errors, setErrors] = useState({});
+  const [form, setForm] = useState(formTemplate);
 
   const changeName = (text) => {
     console.log(text);
@@ -37,6 +76,16 @@ const Register1 = ({...props}) => {
     console.log(email);
   };
 
+  const onPrev = () => {
+    setStep((step) => (step > 0 ? step - 1 : 0));
+  };
+
+  const onNext = () => {
+    setStep((step) => (step < 2 ? step + 1 : step));
+  };
+
+  const onDone = () => {};
+
   return (
     <Layout style={{flex: 1}}>
       <Layout style={styles.stepContainer}>
@@ -45,26 +94,50 @@ const Register1 = ({...props}) => {
             styles.stepItem,
             {backgroundColor: evaTheme['color-success-900']},
           ]}></Layout>
-        <Layout style={styles.stepItem}></Layout>
-        <Layout style={styles.stepItem}></Layout>
+        <Layout
+          style={[
+            styles.stepItem,
+            {
+              backgroundColor:
+                step === 1 || step === 2
+                  ? evaTheme['color-success-900']
+                  : evaTheme['color-basic-900'],
+            },
+          ]}></Layout>
+        <Layout
+          style={[
+            styles.stepItem,
+            {
+              backgroundColor:
+                step === 2
+                  ? evaTheme['color-success-900']
+                  : evaTheme['color-basic-900'],
+            },
+          ]}></Layout>
       </Layout>
       <Text category="h3" style={{letterSpacing: 1, marginLeft: 8}}>
         Sign Up
       </Text>
       <Layout style={{marginTop: 30}}>
         <Input
-          placeholder="Full Name"
+          placeholder={form[step][0].placeholder}
+          value={form[step][0].value}
           error={errors.name}
           onChangeText={changeName}
         />
         <Input
-          placeholder="Email Address"
+          placeholder={form[step][1].placeholder}
+          value={form[step][1].value}
           error={errors.email}
           onChangeText={changeEmail}
         />
       </Layout>
-      <Layout style={styles.btnContainer}>
-        <TouchableOpacity>
+      <Layout
+        style={[
+          styles.btnContainer,
+          {justifyContent: step === 2 ? 'space-between' : 'flex-start'},
+        ]}>
+        <TouchableOpacity onPress={onPrev}>
           <Layout style={styles.btn}>
             <Layout style={styles.btnInner}>
               <Icon pack="font-awesome" name="arrow-left" style={styles.icon} />
@@ -72,17 +145,29 @@ const Register1 = ({...props}) => {
           </Layout>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{marginLeft: 15}}>
-          <Layout style={styles.btn}>
-            <Layout style={styles.btnInner}>
-              <Icon
-                pack="font-awesome"
-                name="arrow-right"
-                style={styles.icon}
-              />
+        {step === 2 ? (
+          <Button
+            size="giant"
+            status="primary"
+            style={{width: 130}}
+            onPress={onDone}>
+            <Text category="s1" style={{color: 'white', letterSpacing: 1}}>
+              Done
+            </Text>
+          </Button>
+        ) : (
+          <TouchableOpacity style={{marginLeft: 15}} onPress={onNext}>
+            <Layout style={styles.btn}>
+              <Layout style={styles.btnInner}>
+                <Icon
+                  pack="font-awesome"
+                  name="arrow-right"
+                  style={styles.icon}
+                />
+              </Layout>
             </Layout>
-          </Layout>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        )}
       </Layout>
       <Layout style={{marginTop: 40}}>
         <TouchableOpacity onPress={() => props.history.push('/welcome/signin')}>
@@ -95,10 +180,4 @@ const Register1 = ({...props}) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    width: state.layout.width,
-  };
-}
-
-export default withRouter(connect(mapStateToProps)(Register1));
+export default Register;
