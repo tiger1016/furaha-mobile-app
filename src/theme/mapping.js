@@ -1,7 +1,7 @@
 import {Dimensions, PixelRatio} from 'react-native';
 const scale = Dimensions.get('window').width / 375;
 
-function actuatedNormalize(size) {
+export function actuatedNormalize(size) {
   const newSize = size * scale;
   if (Platform.OS === 'ios') {
     return Math.round(PixelRatio.roundToNearestPixel(newSize));

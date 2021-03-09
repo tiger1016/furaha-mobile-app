@@ -1,27 +1,17 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {
-  Button,
-  Layout,
-  Text,
-  Icon,
-  useStyleSheet,
-  useTheme,
-} from '@ui-kitten/components';
-import {connect} from 'react-redux';
-import themeStyles from './style';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+} from 'src/screens/onboard/Register/node_modules/react';
+import {useStyleSheet, useTheme} from '@ui-kitten/components';
+import {connect} from 'src/screens/onboard/Register/node_modules/react-redux';
 import {Animated, Easing} from 'react-native';
+import {Switch, NativeRouter, Route, withRouter} from 'react-router-native';
 import {useAppTheme} from '../../../services/context';
+import themeStyles from './style';
+import Boarding from './Boarding';
 import Signin from '../Login';
-import Signup from '../Register1';
-
-const StartIcon = (props) => (
-  <Icon
-    {...props}
-    pack="material"
-    name="people"
-    style={{width: 35, height: 35, color: '#fff'}}
-  />
-);
+import Signup from '../Register';
 
 const logos = [
   require('../../../assets/img/logo.png'),
@@ -30,7 +20,6 @@ const logos = [
 
 const Welcome = ({layout, ...props}) => {
   const [toggled, setToggled] = useState(false);
-  const [step, setStep] = useState('welcome');
 
   const styles = useStyleSheet(themeStyles);
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -163,50 +152,20 @@ const Welcome = ({layout, ...props}) => {
             }}
           />
         </Animated.View>
-        {step === 'welcome' ? (
-          <Layout style={{marginRight: 50}}>
-            <Layout style={[styles.desc, {marginTop: toggled ? 0 : 30}]}>
-              <Text category="h5" style={{letterSpacing: 1, fontWeight: '700'}}>
-                Welcome
-              </Text>
-              <Text category="p1" style={{letterSpacing: 0.48, marginTop: 10}}>
-                Find Artisians around you with ease on furaha app
-              </Text>
-            </Layout>
-            <Layout style={{marginTop: 40}}>
-              <Button
-                size="giant"
-                status="primary"
-                onPress={() => {
-                  setToggled(true);
-                  setStep('signin');
-                  animation(400);
-                }}>
-                <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
-                  Login
-                </Text>
-              </Button>
-              <Button
-                size="giant"
-                status="warning"
-                accessoryLeft={StartIcon}
-                onPress={() => {
-                  setToggled(true);
-                  setStep('signup');
-                  animation(400);
-                }}
-                style={{paddingVertical: 0, marginTop: 15}}>
-                <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
-                  Create an Account
-                </Text>
-              </Button>
-            </Layout>
-          </Layout>
-        ) : step === 'signin' ? (
-          <Signin />
-        ) : (
-          <Signup />
-        )}
+        <Switch>
+          <Route path="/welcome/signin/" component={Signin} />
+          <Route path="/welcome/signup" component={Signup} />
+          <Route
+            path="/welcome"
+            component={() => (
+              <Boarding
+                toggled={toggled}
+                setToggled={setToggled}
+                animation={animation}
+              />
+            )}
+          />
+        </Switch>
       </Animated.View>
     </Animated.View>
   );
@@ -218,4 +177,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Welcome);
+export default withRouter(connect(mapStateToProps)(Welcome));

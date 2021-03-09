@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'src/screens/onboard/Register/node_modules/react';
 import {
   Button,
   Layout,
@@ -8,7 +8,7 @@ import {
   Input,
   Icon,
 } from '@ui-kitten/components';
-import {connect} from 'react-redux';
+import {connect} from 'src/screens/onboard/Register/node_modules/react-redux';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const AlertIcon = (props) => {
@@ -43,6 +43,7 @@ const CustomInput = ({placeholder, error, onChangeText, type, ...props}) => {
       captionIcon={error ? AlertIcon : null}
       textStyle={{
         paddingBottom: 10,
+        marginLeft: 0,
       }}
       style={{
         borderRadius: 0,

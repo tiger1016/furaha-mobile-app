@@ -12,10 +12,6 @@ import BookingStep from './screens/onboard/Landing/BookingStep';
 import SocialStep from './screens/onboard/Landing/SocialStep';
 import VirtualStep from './screens/onboard/Landing/VirtualStep';
 import Welcome from './screens/onboard/Welcome';
-import Login from './screens/onboard/Login';
-import Register1 from './screens/onboard/Register1';
-import Register2 from './screens/onboard/Register2';
-import Register3 from './screens/onboard/Register3';
 
 const Root = ({actions, waiting, ...props}) => {
   useEffect(() => {
@@ -41,15 +37,13 @@ const Root = ({actions, waiting, ...props}) => {
           textStyle={{color: '#FFF'}}
           visible={!waiting}
         />
-        <Route exact path={'/'} component={Landing} />
-        <Route exact path={'/step1'} component={BookingStep} />
-        <Route exact path={'/step2'} component={SocialStep} />
-        <Route exact path={'/step3'} component={VirtualStep} />
-        <Route exact path={'/welcome'} component={Welcome} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register1} />
-        <Route path="/register/step1" component={Register2} />
-        <Route path="/register/step2" component={Register3} />
+        <Switch>
+          <Route path={'/step1'} component={BookingStep} />
+          <Route path={'/step2'} component={SocialStep} />
+          <Route path={'/step3'} component={VirtualStep} />
+          <Route path={'/welcome'} component={Welcome} />
+          <Route path={'/'} component={Landing} />
+        </Switch>
 
         {/* <Route path="/onboarding" component={OnBoarding} />
         <Route path="/onboarding/photo" component={AddPhoto} />

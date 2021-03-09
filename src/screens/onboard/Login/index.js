@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'src/screens/onboard/Register/node_modules/react';
 import {
   Button,
   Layout,
@@ -6,11 +6,13 @@ import {
   useStyleSheet,
   useTheme,
 } from '@ui-kitten/components';
-import {connect} from 'react-redux';
+import {connect} from 'src/screens/onboard/Register/node_modules/react-redux';
+import {withRouter} from 'react-router-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as yup from 'yup';
 import Input from '../../global/input';
 import themeStyles from './style';
+import {actuatedNormalize} from '../../../theme/mapping';
 
 const emailSchema = yup.string().required('Required').email('Invalid Email!');
 
@@ -66,8 +68,10 @@ const Login = ({layout, ...props}) => {
             Forgot password?
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{marginTop: 40}}>
-          <Text category="p1" style={{fontWeight: '600'}}>
+        <TouchableOpacity
+          style={{marginTop: 40}}
+          onPress={() => props.history.push('/welcome/signup/step1')}>
+          <Text category="s1" style={{fontSize: actuatedNormalize(15)}}>
             New User? Create an account
           </Text>
         </TouchableOpacity>
@@ -82,4 +86,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));
