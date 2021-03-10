@@ -44,7 +44,7 @@ const Boarding = ({toggled, setToggled, animation, ...props}) => {
           accessoryLeft={StartIcon}
           onPress={() => {
             setToggled(true);
-            setStep('signup');
+            props.history.push('/welcome/signup');
             animation(400);
           }}
           style={{paddingVertical: 0, marginTop: 15}}>

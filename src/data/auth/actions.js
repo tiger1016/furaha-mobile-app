@@ -1,13 +1,13 @@
 import * as api from './api';
-import * as userApi from '../person/api';
-import * as sharedApi from '../shared/api';
-import * as sharedActions from '../../data/shared/actions';
+// import * as userApi from '../person/api';
+// import * as sharedApi from '../shared/api';
+// import * as sharedActions from '../../data/shared/actions';
 import r from '../../store';
-import analytics from '@react-native-firebase/analytics';
+// import analytics from '@react-native-firebase/analytics';
 import SInfo from 'react-native-sensitive-info';
 import ActionTypes from '../../store/actions';
-import branch from 'react-native-branch';
-import Intercom from 'react-native-intercom';
+// import branch from 'react-native-branch';
+// import Intercom from 'react-native-intercom';
 
 const {store, persistor} = r;
 const actionsCreator = {
@@ -41,6 +41,12 @@ const actionsCreator = {
       payload: payload,
     };
   },
+  changeRegistrationForm: (payload) => {
+    return {
+      type: ActionTypes.REGISTRATIONFORM,
+      payload: payload,
+    };
+  },
 };
 const dispatchAction = function (action, payload) {
   return store.dispatch(actionsCreator[action](payload));
@@ -50,7 +56,7 @@ const login = function (payload) {
     .login(payload)
     .then((responseJson) => {
       storeToken(responseJson);
-      analytics().logLogin({method: 'Email'});
+      // analytics().logLogin({method: 'Email'});
     })
     .catch((error) => {
       return Promise.reject(error);
@@ -59,8 +65,8 @@ const login = function (payload) {
 
 const logout = function (payload) {
   return api.logout(payload).then(() => {
-    branch.logout();
-    Intercom.logout();
+    // branch.logout();
+    // Intercom.logout();
     return dispatchAction('authLogout', {tokenSet: false});
   });
 };
@@ -78,26 +84,26 @@ const getToken = function () {
   });
 };
 
-const socialLogin = function (payload) {
-  return api
-    .socialLogin(payload)
-    .then((response) => {
-      storeToken(response);
-      analytics().logLogin({method: payload.provider});
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
-};
+// const socialLogin = function (payload) {
+//   return api
+//     .socialLogin(payload)
+//     .then((response) => {
+//       storeToken(response);
+//       analytics().logLogin({method: payload.provider});
+//     })
+//     .catch((error) => {
+//       return Promise.reject(error);
+//     });
+// };
 
 const getLoggedInUser = function () {
   return userApi
     .get()
     .then((responseJson) => {
       const user = responseJson.results.data;
-      branch.setIdentity(user.id);
-      sharedActions.initSupport(user);
-      sharedActions.updateSupportUser(user);
+      // branch.setIdentity(user.id);
+      // sharedActions.initSupport(user);
+      // sharedActions.updateSupportUser(user);
       dispatchAction('authLogged', {
         user: user,
       });
@@ -119,7 +125,7 @@ const register = function (payload) {
   return api
     .register(payload)
     .then((responseJson) => {
-      analytics().logSignUp({method: 'Email'});
+      // analytics().logSignUp({method: 'Email'});
       payload = {
         user: responseJson.results.data,
       };
@@ -129,19 +135,25 @@ const register = function (payload) {
       return Promise.reject(error);
     });
 };
-const checkUsername = function (payload) {
-  return sharedApi.checkUsername(payload).then((response) => {
-    return response.results;
-  });
+// const checkUsername = function (payload) {
+//   return sharedApi.checkUsername(payload).then((response) => {
+//     return response.results;
+//   });
+// };
+
+const changeRegistrationForm = (data) => {
+  dispatchAction('changeRegistrationForm', data);
 };
+
 export {
   login,
   logout,
   register,
   getLoggedInUser,
   getToken,
-  socialLogin,
-  checkUsername,
+  // socialLogin,
+  // checkUsername,
+  changeRegistrationForm,
   actionsCreator,
 };
 

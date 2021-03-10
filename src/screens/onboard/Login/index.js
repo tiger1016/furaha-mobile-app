@@ -68,7 +68,7 @@ const Login = ({...props}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{marginTop: 40}}
-          onPress={() => props.history.push('/welcome/signup/step1')}>
+          onPress={() => props.history.push('/welcome/signup')}>
           <Text category="s1" style={{fontSize: actuatedNormalize(15)}}>
             New User? Create an account
           </Text>

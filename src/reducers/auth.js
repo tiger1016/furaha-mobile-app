@@ -6,6 +6,14 @@ const initialState = {
   state: null,
   tokenSet: false,
   user: {},
+  registrationForm: {
+    name: '',
+    email: '',
+    phone: '',
+    findout: '',
+    password: '',
+    confirm: '',
+  },
 };
 
 export default (state = initialState, {type, payload}) => {
@@ -26,6 +34,10 @@ export default (state = initialState, {type, payload}) => {
         user: {},
         tokenSet: false,
         waiting: true,
+      });
+    case ActionTypes.REGISTRATIONFORM:
+      return objectAssign({}, state, {
+        registrationForm: objectAssign({}, state.registrationForm, payload),
       });
     default:
       return state;

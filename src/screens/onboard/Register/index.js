@@ -8,10 +8,13 @@ import {
   Button,
 } from '@ui-kitten/components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as yup from 'yup';
 import Input from '../../global/input';
 import themeStyles from './style';
 import {actuatedNormalize} from '../../../theme/mapping';
+import {changeRegistrationForm} from '../../../data/auth/actions';
 
 const schema = yup.object().shape({
   email: yup.string().required('Required').email('Invalid Email!'),
@@ -60,7 +63,7 @@ const formTemplate = [
   ],
 ];
 
-const Register = ({...props}) => {
+const Register = ({registrationForm, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const [step, setStep] = useState(0);
   const evaTheme = useTheme();
@@ -68,11 +71,17 @@ const Register = ({...props}) => {
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState(formTemplate);
 
-  const changeName = (text) => {
-    console.log(text);
+  const changeFirst = (text) => {
+    switch (step) {
+      case 0:
+      case 1:
+        break;
+      case 2:
+        break;
+    }
   };
 
-  const changeEmail = (email) => {
+  const changeSecond = (email) => {
     console.log(email);
   };
 
@@ -123,13 +132,13 @@ const Register = ({...props}) => {
           placeholder={form[step][0].placeholder}
           value={form[step][0].value}
           error={errors.name}
-          onChangeText={changeName}
+          onChangeText={changeFirst}
         />
         <Input
           placeholder={form[step][1].placeholder}
           value={form[step][1].value}
           error={errors.email}
-          onChangeText={changeEmail}
+          onChangeText={changeSecond}
         />
       </Layout>
       <Layout
@@ -180,4 +189,10 @@ const Register = ({...props}) => {
   );
 };
 
-export default Register;
+function mapStateToProps(state) {
+  return {
+    registrationForm: state.registrationForm,
+  };
+}
+
+export default connect(mapStateToProps)(Register);
