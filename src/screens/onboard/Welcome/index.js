@@ -16,16 +16,17 @@ const logos = [
 
 const Welcome = ({layout, ...props}) => {
   const [toggled, setToggled] = useState(false);
+  const [sw, setSw] = useState(0);
 
   const styles = useStyleSheet(themeStyles);
   const spinValue = useRef(new Animated.Value(0)).current;
 
-  const animation = (duration) => {
+  const animation = (duration, type) => {
     spinValue.setValue(0);
     Animated.timing(spinValue, {
       duration,
       toValue: 1,
-      easing: Easing.linear,
+      easing: type,
       useNativeDriver: false,
     }).start();
   };
@@ -43,14 +44,26 @@ const Welcome = ({layout, ...props}) => {
         },
         {
           scaleX: spinValue.interpolate({
-            inputRange: [0, 0.3, 0.6, 0.8, 1],
-            outputRange: toggled ? [1, 1, 1, 1, 1] : [1, 1, 1.6, 1.6, 1],
+            inputRange: sw === 0 ? [0, 0.3, 0.6, 0.8, 1] : [0, 1],
+            outputRange: toggled
+              ? sw === 0
+                ? [1, 1, 1, 1, 1]
+                : sw === 1
+                ? [1, 1.1]
+                : [1.1, 1]
+              : [1, 1, 1.6, 1.6, 1],
           }),
         },
         {
           scaleY: spinValue.interpolate({
-            inputRange: [0, 0.3, 0.6, 0.8, 1],
-            outputRange: toggled ? [1, 1, 1, 1, 1] : [1, 1, 1.6, 1.6, 1],
+            inputRange: sw === 0 ? [0, 0.3, 0.6, 0.8, 1] : [0, 1],
+            outputRange: toggled
+              ? sw === 0
+                ? [1, 1, 1, 1, 1]
+                : sw === 1
+                ? [1, 1.1]
+                : [1.1, 1]
+              : [1, 1, 1.6, 1.6, 1],
           }),
         },
         {
@@ -63,13 +76,21 @@ const Welcome = ({layout, ...props}) => {
       height: spinValue.interpolate({
         inputRange: toggled ? [0, 1] : [0, 0.6, 0.8, 1],
         outputRange: toggled
-          ? [layout.height / 2, layout.height / 3]
+          ? sw === 0
+            ? [layout.height / 2, layout.height / 3]
+            : sw === 1
+            ? [layout.height / 3, layout.height / 3 + 10]
+            : [layout.height / 3 + 10, layout.height / 3]
           : [layout.height, layout.height, layout.height, layout.height / 2],
       }),
       borderBottomRightRadius: spinValue.interpolate({
         inputRange: toggled ? [0, 1] : [0, 0.6, 0.8, 1],
         outputRange: toggled
-          ? [layout.width - 130, layout.width - 300]
+          ? sw === 0
+            ? [layout.width - 130, layout.width - 300]
+            : sw === 1
+            ? [layout.width - 300, layout.width - 310]
+            : [layout.width - 310, layout.width - 300]
           : [0, 0, 0, layout.width - 130],
       }),
     }),
@@ -77,39 +98,47 @@ const Welcome = ({layout, ...props}) => {
       height: spinValue.interpolate({
         inputRange: [0, 1],
         outputRange: toggled
-          ? [layout.height / 2 + 50, layout.height / 2 + 70]
+          ? sw === 0
+            ? [layout.height / 2 + 50, layout.height / 2 + 70]
+            : sw === 1
+            ? [layout.height / 2 + 70, layout.height / 2 + 50]
+            : [layout.height / 2 + 50, layout.height / 2 + 70]
           : [layout.height / 2 + 50, layout.height / 2 + 50],
       }),
     }),
     logoView: () => ({
       top: spinValue.interpolate({
         inputRange: [0, 1],
-        outputRange: toggled ? [0, -55] : [0, 0],
-      }),
-      marginTop: spinValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: toggled ? [80, 0] : [80, 80],
+        outputRange: toggled
+          ? sw === 0
+            ? [layout.height / 3 + 100, layout.height / 3 - 55]
+            : sw === 1
+            ? [layout.height / 3 - 55, layout.height / 3 - 35]
+            : [layout.height / 3 - 35, layout.height / 3 - 55]
+          : [layout.height / 3 + 100, layout.height / 3 + 100],
       }),
     }),
     logo: () => ({
-      opacity: spinValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-      }),
       width: spinValue.interpolate({
         inputRange: [0, 1],
-        outputRange: toggled ? [175, 110] : [170, 175],
+        outputRange: toggled
+          ? sw === 0
+            ? [175, 130]
+            : [130, 130]
+          : [170, 175],
       }),
       height: spinValue.interpolate({
         inputRange: [0, 1],
-        outputRange: toggled ? [55, 35] : [65, 55],
+        outputRange: toggled ? (sw === 0 ? [55, 45] : [45, 45]) : [65, 55],
       }),
     }),
     backView: () => ({
       backgroundColor: spinValue.interpolate({
         inputRange: [0, 1],
         outputRange: toggled
-          ? [evaTheme['color-basic-800'], evaTheme['color-warning-100']]
+          ? sw === 0
+            ? [evaTheme['color-basic-800'], evaTheme['color-warning-100']]
+            : [evaTheme['color-warning-100'], evaTheme['color-warning-100']]
           : [evaTheme['color-basic-800'], evaTheme['color-basic-800']],
       }),
     }),
@@ -119,7 +148,7 @@ const Welcome = ({layout, ...props}) => {
   const evaTheme = useTheme();
 
   useEffect(() => {
-    animation(1500);
+    animation(1500, Easing.linear);
   }, []);
 
   return (
@@ -127,36 +156,47 @@ const Welcome = ({layout, ...props}) => {
       style={[styles.backContainer, {...dynamicStyles.backView()}]}>
       <Animated.Image
         source={require('../../../assets/img/first.png')}
-        style={[styles.outContainer, {...dynamicStyles.image()}]}
+        style={[styles.outContainer, {zIndex: 2, ...dynamicStyles.image()}]}
       />
+      <Animated.View
+        style={[
+          styles.logoContainer,
+          {zIndex: 1, marginLeft: 40, ...dynamicStyles.logoView()},
+        ]}>
+        <Animated.Image
+          source={theme === 'dark' ? logos[1] : logos[0]}
+          style={{
+            width: '100%',
+            height: '100%',
+            resizeMode: 'contain',
+            ...dynamicStyles.logo(),
+          }}
+        />
+      </Animated.View>
       <Animated.View
         style={[
           styles.innerContainer,
           {
+            paddingVertical: 35,
             ...dynamicStyles.view(),
           },
         ]}>
-        <Animated.View
-          style={[styles.logoContainer, {...dynamicStyles.logoView()}]}>
-          <Animated.Image
-            source={theme === 'dark' ? logos[1] : logos[0]}
-            style={{
-              width: '100%',
-              height: '100%',
-              resizeMode: 'contain',
-              ...dynamicStyles.logo(),
-            }}
-          />
-        </Animated.View>
         <Switch>
-          <Route path="/welcome/signin/" component={Signin} />
-          <Route path="/welcome/signup" component={Signup} />
+          <Route
+            path="/welcome/signin/"
+            component={() => <Signin setSw={setSw} animation={animation} />}
+          />
+          <Route
+            path="/welcome/signup"
+            component={() => <Signup setSw={setSw} animation={animation} />}
+          />
           <Route
             path="/welcome"
             component={() => (
               <Boarding
                 toggled={toggled}
                 setToggled={setToggled}
+                setSw={setSw}
                 animation={animation}
               />
             )}

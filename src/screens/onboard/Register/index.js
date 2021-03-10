@@ -9,12 +9,14 @@ import {
 } from '@ui-kitten/components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-native';
 import {bindActionCreators} from 'redux';
 import * as yup from 'yup';
 import Input from '../../global/input';
 import themeStyles from './style';
 import {actuatedNormalize} from '../../../theme/mapping';
 import {changeRegistrationForm} from '../../../data/auth/actions';
+import {Easing} from 'react-native';
 
 const schema = yup.object().shape({
   email: yup.string().required('Required').email('Invalid Email!'),
@@ -63,7 +65,7 @@ const formTemplate = [
   ],
 ];
 
-const Register = ({registrationForm, ...props}) => {
+const Register = ({setSw, animation, registrationForm, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const [step, setStep] = useState(0);
   const evaTheme = useTheme();
@@ -179,7 +181,12 @@ const Register = ({registrationForm, ...props}) => {
         )}
       </Layout>
       <Layout style={{marginTop: 40}}>
-        <TouchableOpacity onPress={() => props.history.push('/welcome/signin')}>
+        <TouchableOpacity
+          onPress={() => {
+            setSw(2);
+            animation(300, Easing.cubic);
+            props.history.push('/welcome/signin');
+          }}>
           <Text category="s1" style={{fontSize: actuatedNormalize(15)}}>
             Already a user? Sign in
           </Text>
@@ -195,4 +202,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Register);
+export default withRouter(connect(mapStateToProps)(Register));

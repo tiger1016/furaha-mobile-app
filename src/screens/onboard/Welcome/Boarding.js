@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Layout, Text, Icon, useStyleSheet} from '@ui-kitten/components';
 import {withRouter} from 'react-router-native';
 import themeStyles from './style';
+import {Easing} from 'react-native';
 
 const StartIcon = (props) => (
   <Icon
@@ -17,7 +18,7 @@ const Boarding = ({toggled, setToggled, animation, ...props}) => {
 
   return (
     <Layout style={{marginRight: 50}}>
-      <Layout style={[styles.desc, {marginTop: toggled ? 0 : 30}]}>
+      <Layout style={[styles.desc, {marginTop: toggled ? 0 : 130}]}>
         <Text category="h5" style={{letterSpacing: 1, fontWeight: '700'}}>
           Welcome
         </Text>
@@ -32,7 +33,7 @@ const Boarding = ({toggled, setToggled, animation, ...props}) => {
           onPress={() => {
             setToggled(true);
             props.history.push('/welcome/signin');
-            animation(400);
+            animation(300, Easing.linear);
           }}>
           <Text style={{letterSpacing: 1, color: 'white'}} category="s1">
             Login
@@ -45,7 +46,7 @@ const Boarding = ({toggled, setToggled, animation, ...props}) => {
           onPress={() => {
             setToggled(true);
             props.history.push('/welcome/signup');
-            animation(400);
+            animation(300, Easing.linear);
           }}
           style={{paddingVertical: 0, marginTop: 15}}>
           <Text style={{letterSpacing: 1, color: 'white'}} category="s1">

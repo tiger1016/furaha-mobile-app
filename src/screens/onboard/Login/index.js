@@ -7,14 +7,16 @@ import {
   useTheme,
 } from '@ui-kitten/components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {withRouter} from 'react-router-native';
 import * as yup from 'yup';
 import Input from '../../global/input';
 import themeStyles from './style';
 import {actuatedNormalize} from '../../../theme/mapping';
+import {Easing} from 'react-native';
 
 const emailSchema = yup.string().required('Required').email('Invalid Email!');
 
-const Login = ({...props}) => {
+const Login = ({setSw, animation, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const evaTheme = useTheme();
 
@@ -68,7 +70,11 @@ const Login = ({...props}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{marginTop: 40}}
-          onPress={() => props.history.push('/welcome/signup')}>
+          onPress={() => {
+            setSw(1);
+            animation(300, Easing.cubic);
+            props.history.push('/welcome/signup');
+          }}>
           <Text category="s1" style={{fontSize: actuatedNormalize(15)}}>
             New User? Create an account
           </Text>
@@ -78,4 +84,4 @@ const Login = ({...props}) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);
