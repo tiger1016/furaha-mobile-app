@@ -17,7 +17,8 @@ const styles = StyleService.create({
     paddingBottom: 20,
   },
   textContainer: {
-    paddingTop: height / 2,
+    zIndex: 4,
+    paddingTop: height / 2 + 20,
     paddingHorizontal: 45,
   },
   title: {
@@ -29,6 +30,7 @@ const styles = StyleService.create({
     textAlign: 'center',
     lineHeight: 25,
     letterSpacing: 1,
+    marginTop: 5,
   },
   skipContainer: {
     justifyContent: 'space-between',

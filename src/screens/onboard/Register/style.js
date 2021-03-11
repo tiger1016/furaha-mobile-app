@@ -46,6 +46,27 @@ const styles = StyleService.create({
     height: 21,
     width: 21,
   },
+
+  codefieldRoot: {
+    width: width - 100,
+    paddingHorizontal: 20,
+  },
+  cellRoot: {
+    width: (width - 200) / 6,
+    height: (width - 200) / 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomColor: 'color-basic-500',
+    borderBottomWidth: 1,
+  },
+  focusCell: {
+    borderBottomColor: 'color-basic-800',
+    borderBottomWidth: 2,
+  },
+  cellText: {
+    color: 'color-basic-800',
+    fontWeight: '400',
+  },
 });
 
 export default styles;

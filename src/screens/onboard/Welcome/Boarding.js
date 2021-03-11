@@ -13,7 +13,7 @@ const StartIcon = (props) => (
   />
 );
 
-const Boarding = ({toggled, setToggled, animation, ...props}) => {
+const Boarding = ({toggled, setToggled, setSw, animation, ...props}) => {
   const styles = useStyleSheet(themeStyles);
 
   return (
@@ -45,6 +45,7 @@ const Boarding = ({toggled, setToggled, animation, ...props}) => {
           accessoryLeft={StartIcon}
           onPress={() => {
             setToggled(true);
+            setSw(3);
             props.history.push('/welcome/signup');
             animation(300, Easing.linear);
           }}

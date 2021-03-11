@@ -51,7 +51,9 @@ const Welcome = ({layout, ...props}) => {
                 ? [1, 1, 1, 1, 1]
                 : sw === 1
                 ? [1, 1.1]
-                : [1.1, 1]
+                : sw === 2
+                ? [1.1, 1]
+                : [1, 1.1]
               : [1, 1, 1.6, 1.6, 1],
           }),
         },
@@ -63,7 +65,9 @@ const Welcome = ({layout, ...props}) => {
                 ? [1, 1, 1, 1, 1]
                 : sw === 1
                 ? [1, 1.1]
-                : [1.1, 1]
+                : sw === 2
+                ? [1.1, 1]
+                : [1, 1.1]
               : [1, 1, 1.6, 1.6, 1],
           }),
         },
@@ -78,21 +82,30 @@ const Welcome = ({layout, ...props}) => {
         inputRange: toggled ? [0, 1] : [0, 0.6, 0.8, 1],
         outputRange: toggled
           ? sw === 0
-            ? [layout.height / 2, layout.height / 3]
+            ? [layout.height / 2 - 50, layout.height / 3 - 70]
             : sw === 1
-            ? [layout.height / 3, layout.height / 3 + 10]
-            : [layout.height / 3 + 10, layout.height / 3]
-          : [layout.height, layout.height, layout.height, layout.height / 2],
+            ? [layout.height / 3 - 70, layout.height / 3 - 50]
+            : sw === 2
+            ? [layout.height / 3 - 50, layout.height / 3 - 70]
+            : [layout.height / 2 - 50, layout.height / 3 - 50]
+          : [
+              layout.height,
+              layout.height,
+              layout.height,
+              layout.height / 2 - 50,
+            ],
       }),
       borderBottomRightRadius: spinValue.interpolate({
         inputRange: toggled ? [0, 1] : [0, 0.6, 0.8, 1],
         outputRange: toggled
           ? sw === 0
-            ? [layout.width - 130, layout.width - 300]
+            ? [layout.width - 150, layout.width - 300]
             : sw === 1
             ? [layout.width - 300, layout.width - 310]
-            : [layout.width - 310, layout.width - 300]
-          : [0, 0, 0, layout.width - 130],
+            : sw === 2
+            ? [layout.width - 310, layout.width - 300]
+            : [layout.width - 150, layout.width - 310]
+          : [0, 0, 0, layout.width - 150],
       }),
     }),
     view: () => ({
@@ -100,11 +113,13 @@ const Welcome = ({layout, ...props}) => {
         inputRange: [0, 1],
         outputRange: toggled
           ? sw === 0
-            ? [layout.height / 2 + 50, layout.height / 2 + 70]
+            ? [layout.height / 2 + 90, layout.height / 2 + 150]
             : sw === 1
-            ? [layout.height / 2 + 70, layout.height / 2 + 50]
-            : [layout.height / 2 + 50, layout.height / 2 + 70]
-          : [layout.height / 2 + 50, layout.height / 2 + 50],
+            ? [layout.height / 2 + 150, layout.height / 2 + 110]
+            : sw === 2
+            ? [layout.height / 2 + 110, layout.height / 2 + 150]
+            : [layout.height / 2 + 90, layout.height / 2 + 110]
+          : [layout.height / 2 + 90, layout.height / 2 + 90],
       }),
     }),
     logoView: () => ({
@@ -112,11 +127,13 @@ const Welcome = ({layout, ...props}) => {
         inputRange: [0, 1],
         outputRange: toggled
           ? sw === 0
-            ? [layout.height / 3 + 100, layout.height / 3 - 60]
+            ? [layout.height / 3 + 60, layout.height / 3 - 135]
             : sw === 1
-            ? [layout.height / 3 - 60, layout.height / 3 - 40]
-            : [layout.height / 3 - 40, layout.height / 3 - 60]
-          : [layout.height / 3 + 100, layout.height / 3 + 100],
+            ? [layout.height / 3 - 135, layout.height / 3 - 100]
+            : sw === 2
+            ? [layout.height / 3 - 100, layout.height / 3 - 135]
+            : [layout.height / 3 + 60, layout.height / 3 - 100]
+          : [layout.height / 3 + 60, layout.height / 3 + 60],
       }),
     }),
     logo: () => ({
@@ -156,11 +173,20 @@ const Welcome = ({layout, ...props}) => {
     <Animated.View
       style={[styles.backContainer, {...dynamicStyles.backView()}]}>
       <Animated.Image
-        source={require('../../../assets/img/first.png')}
+        source={
+          step === 0
+            ? require('../../../assets/img/makeup.png')
+            : step === 1 || step === 2
+            ? require('../../../assets/img/step2.jpg')
+            : require('../../../assets/img/step3.jpg')
+        }
         style={[styles.outContainer, {zIndex: 2, ...dynamicStyles.image()}]}
       />
       <Layout
-        style={[styles.titleWrapper, {display: toggled ? 'flex' : 'none'}]}>
+        style={[
+          styles.titleWrapper,
+          {display: sw === 1 || sw === 3 ? 'flex' : 'none'},
+        ]}>
         <Text
           category="h4"
           style={{color: 'white', fontWeight: '600', marginBottom: 10}}>
@@ -175,20 +201,17 @@ const Welcome = ({layout, ...props}) => {
           <Layout
             style={{
               ...styles.titleStep,
-              backgroundColor:
-                step === 0 ? evaTheme['color-basic-800'] : '#FFF',
+              backgroundColor: step === 0 ? '#FFFF00' : '#FFF',
             }}></Layout>
           <Layout
             style={{
               ...styles.titleStep,
-              backgroundColor:
-                step === 1 ? evaTheme['color-basic-800'] : '#FFF',
+              backgroundColor: step === 1 || step === 2 ? '#FFFF00' : '#FFF',
             }}></Layout>
           <Layout
             style={{
               ...styles.titleStep,
-              backgroundColor:
-                step === 2 ? evaTheme['color-basic-800'] : '#FFF',
+              backgroundColor: step === 3 ? '#FFFF00' : '#FFF',
             }}></Layout>
         </Layout>
       </Layout>
