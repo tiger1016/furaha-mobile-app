@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {useStyleSheet, useTheme} from '@ui-kitten/components';
+import {Layout, useStyleSheet, useTheme, Text} from '@ui-kitten/components';
 import {connect} from 'react-redux';
 import {Animated, Easing} from 'react-native';
 import {Switch, Route} from 'react-router-native';
@@ -16,6 +16,7 @@ const logos = [
 
 const Welcome = ({layout, ...props}) => {
   const [toggled, setToggled] = useState(false);
+  const [step, setStep] = useState(0);
   const [sw, setSw] = useState(0);
 
   const styles = useStyleSheet(themeStyles);
@@ -111,10 +112,10 @@ const Welcome = ({layout, ...props}) => {
         inputRange: [0, 1],
         outputRange: toggled
           ? sw === 0
-            ? [layout.height / 3 + 100, layout.height / 3 - 55]
+            ? [layout.height / 3 + 100, layout.height / 3 - 60]
             : sw === 1
-            ? [layout.height / 3 - 55, layout.height / 3 - 35]
-            : [layout.height / 3 - 35, layout.height / 3 - 55]
+            ? [layout.height / 3 - 60, layout.height / 3 - 40]
+            : [layout.height / 3 - 40, layout.height / 3 - 60]
           : [layout.height / 3 + 100, layout.height / 3 + 100],
       }),
     }),
@@ -158,10 +159,43 @@ const Welcome = ({layout, ...props}) => {
         source={require('../../../assets/img/first.png')}
         style={[styles.outContainer, {zIndex: 2, ...dynamicStyles.image()}]}
       />
+      <Layout
+        style={[styles.titleWrapper, {display: toggled ? 'flex' : 'none'}]}>
+        <Text
+          category="h4"
+          style={{color: 'white', fontWeight: '600', marginBottom: 10}}>
+          Makeups
+        </Text>
+        <Text
+          category="s1"
+          style={{color: 'white', letterSpacing: 0.5, lineHeight: 20}}>
+          Find Artisians around you with ease on furaha app
+        </Text>
+        <Layout style={styles.titleStepWrapper}>
+          <Layout
+            style={{
+              ...styles.titleStep,
+              backgroundColor:
+                step === 0 ? evaTheme['color-basic-800'] : '#FFF',
+            }}></Layout>
+          <Layout
+            style={{
+              ...styles.titleStep,
+              backgroundColor:
+                step === 1 ? evaTheme['color-basic-800'] : '#FFF',
+            }}></Layout>
+          <Layout
+            style={{
+              ...styles.titleStep,
+              backgroundColor:
+                step === 2 ? evaTheme['color-basic-800'] : '#FFF',
+            }}></Layout>
+        </Layout>
+      </Layout>
       <Animated.View
         style={[
           styles.logoContainer,
-          {zIndex: 1, marginLeft: 40, ...dynamicStyles.logoView()},
+          {zIndex: 1, marginLeft: 50, ...dynamicStyles.logoView()},
         ]}>
         <Animated.Image
           source={theme === 'dark' ? logos[1] : logos[0]}
@@ -184,11 +218,20 @@ const Welcome = ({layout, ...props}) => {
         <Switch>
           <Route
             path="/welcome/signin/"
-            component={() => <Signin setSw={setSw} animation={animation} />}
+            component={() => (
+              <Signin setSw={setSw} animation={animation} setStep={setStep} />
+            )}
           />
           <Route
             path="/welcome/signup"
-            component={() => <Signup setSw={setSw} animation={animation} />}
+            component={() => (
+              <Signup
+                setSw={setSw}
+                animation={animation}
+                step={step}
+                setStep={setStep}
+              />
+            )}
           />
           <Route
             path="/welcome"

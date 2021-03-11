@@ -14,7 +14,15 @@ const AlertIcon = (props) => {
   );
 };
 
-const CustomInput = ({placeholder, error, onChangeText, type, ...props}) => {
+const CustomInput = ({
+  placeholder,
+  error,
+  onChangeText,
+  type,
+  value,
+  leftIcon,
+  ...props
+}) => {
   const evaTheme = useTheme();
 
   const onChange = (text) => {
@@ -25,7 +33,9 @@ const CustomInput = ({placeholder, error, onChangeText, type, ...props}) => {
     <Input
       status="basic"
       placeholder={placeholder}
+      value={value}
       secureTextEntry={type === 'password' ? true : false}
+      accessoryLeft={leftIcon}
       caption={() => (
         <Text category="c1" status="danger">
           {error}
@@ -34,6 +44,7 @@ const CustomInput = ({placeholder, error, onChangeText, type, ...props}) => {
       captionIcon={error ? AlertIcon : null}
       textStyle={{
         paddingBottom: 10,
+        paddingTop: 5,
         marginLeft: 0,
       }}
       style={{

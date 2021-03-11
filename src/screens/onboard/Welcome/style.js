@@ -20,7 +20,7 @@ const styles = StyleService.create({
     bottom: 0,
     width: width + 100,
     paddingBottom: 50,
-    paddingHorizontal: 40,
+    paddingHorizontal: 50,
     paddingRight: 90,
     borderColor: '#00000012',
     borderWidth: 1,
@@ -84,6 +84,24 @@ const styles = StyleService.create({
     },
     shadowColor: '#00000064',
     shadowRadius: 3,
+  },
+  titleWrapper: {
+    zIndex: 3,
+    position: 'absolute',
+    height: height / 3,
+    paddingHorizontal: 60,
+    justifyContent: 'center',
+  },
+  titleStepWrapper: {
+    marginTop: 15,
+    flexDirection: 'row',
+  },
+  titleStep: {
+    borderRadius: 10,
+    width: 10,
+    height: 10,
+    marginRight: 5,
+    backgroundColor: '#FFF',
   },
 });
 

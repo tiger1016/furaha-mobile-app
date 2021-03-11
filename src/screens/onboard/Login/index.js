@@ -16,7 +16,7 @@ import {Easing} from 'react-native';
 
 const emailSchema = yup.string().required('Required').email('Invalid Email!');
 
-const Login = ({setSw, animation, ...props}) => {
+const Login = ({setSw, animation, setStep, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const evaTheme = useTheme();
 
@@ -37,10 +37,10 @@ const Login = ({setSw, animation, ...props}) => {
 
   return (
     <Layout style={[styles.backContainer]}>
-      <Text category="h3" style={{letterSpacing: 1}}>
+      <Text category="h3" style={{letterSpacing: 1, marginLeft: 8}}>
         Sign In
       </Text>
-      <Layout style={{marginTop: 20}}>
+      <Layout style={{marginTop: 25}}>
         <Input
           placeholder="Email Address"
           error={errors.email}
@@ -71,6 +71,7 @@ const Login = ({setSw, animation, ...props}) => {
         <TouchableOpacity
           style={{marginTop: 40}}
           onPress={() => {
+            setStep(0);
             setSw(1);
             animation(300, Easing.cubic);
             props.history.push('/welcome/signup');
