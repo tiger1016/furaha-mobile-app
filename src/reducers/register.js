@@ -14,6 +14,8 @@ export default (state = initialState, {type, payload}) => {
   switch (type) {
     case ActionTypes.REGISTRATIONFORM:
       return objectAssign({}, state, payload);
+    case ActionTypes.REGISTRATIONFORMCLEAR:
+      return initialState;
     default:
       return state;
   }

@@ -14,27 +14,44 @@ import themeStyles from './style';
 import {actuatedNormalize} from '../../../theme/mapping';
 import {Easing} from 'react-native';
 
-const emailSchema = yup.string().required('Required').email('Invalid Email!');
+const schema = yup.object().shape({
+  password: yup.string().required('Required'),
+  email: yup.string().required('Required').email('Invalid Email!'),
+});
 
 const Login = ({setSw, animation, setStep, ...props}) => {
   const styles = useStyleSheet(themeStyles);
   const evaTheme = useTheme();
 
+  const [forms, setForms] = useState({});
   const [errors, setErrors] = useState({});
 
-  const changeEmail = (txt) => {};
+  const changeEmail = (email) => {
+    setForms((form) => ({
+      ...form,
+      email,
+    }));
+  };
 
-  const changePassword = (txt) => {
-    console.log(txt);
+  const changePassword = (password) => {
+    setForms((form) => ({
+      ...form,
+      password,
+    }));
   };
 
   const login = () => {
-    // emailSchema
-    //   .validate(txt)
-    //   .then(() => [])
-    //   .catch(err);
+    schema
+      .validate(forms)
+      .then(() => {
+        setErrors({});
+      })
+      .catch((err) => {
+        setErrors({
+          [err.path]: err.message,
+        });
+      });
   };
-
   return (
     <Layout style={[styles.backContainer]}>
       <Text category="h3" style={{letterSpacing: 1, marginLeft: 8}}>
@@ -49,6 +66,7 @@ const Login = ({setSw, animation, setStep, ...props}) => {
         <Input
           type="password"
           placeholder="Password"
+          error={errors.password}
           onChangeText={changePassword}
         />
         <Button

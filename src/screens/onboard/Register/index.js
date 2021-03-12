@@ -12,11 +12,12 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-native';
 import {Easing} from 'react-native';
 import {bindActionCreators} from 'redux';
+import objectAssign from 'object-assign';
 import * as yup from 'yup';
 import Input from '../../global/input';
 import themeStyles from './style';
 import {actuatedNormalize} from '../../../theme/mapping';
-import {changeRegistrationForm} from '../../../data/register/actions';
+import * as UserAcions from '../../../data/register/actions';
 import ConfirmCode from './ConfirmCode';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -50,7 +51,8 @@ const Register = ({
   step,
   setStep,
   registrationForm,
-  actions,
+  changeRegistrationForm,
+  registrationFormClear,
   ...props
 }) => {
   const styles = useStyleSheet(themeStyles);
@@ -77,7 +79,7 @@ const Register = ({
   const [code, setCode] = useState('');
 
   const onChangeText = (label, text) => {
-    actions({
+    changeRegistrationForm({
       [label]: text,
     });
   };
@@ -297,6 +299,7 @@ const Register = ({
           onPress={() => {
             setSw(2);
             animation(300, Easing.cubic);
+            registrationFormClear();
             props.history.push('/welcome/signin');
           }}>
           <Text category="s1" style={{fontSize: actuatedNormalize(15)}}>
@@ -316,7 +319,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: changeRegistrationForm,
+    changeRegistrationForm: UserAcions.changeRegistrationForm,
+    registrationFormClear: UserAcions.registrationFormClear,
   };
 }
 

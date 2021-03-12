@@ -10,6 +10,11 @@ const actionsCreator = {
       payload: payload,
     };
   },
+  registrationFormClear: () => {
+    return {
+      type: ActionTypes.REGISTRATIONFORMCLEAR,
+    };
+  },
 };
 const dispatchAction = function (action, payload) {
   return store.dispatch(actionsCreator[action](payload));
@@ -34,6 +39,8 @@ const changeRegistrationForm = (data) => {
   dispatchAction('changeRegistrationForm', data);
 };
 
-export {register, changeRegistrationForm};
+const registrationFormClear = () => {
+  dispatchAction('registrationFormClear');
+};
 
-export default actionsCreator;
+export {register, changeRegistrationForm, registrationFormClear};

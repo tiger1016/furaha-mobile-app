@@ -236,7 +236,7 @@ const Landing = ({...props}) => {
         </Animated.View>
         <Animated.View
           style={{
-            zIndex: 2,
+            zIndex: 1,
             position: 'absolute',
             justifyContent: 'flex-end',
             alignItems: 'center',
