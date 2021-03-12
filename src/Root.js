@@ -8,9 +8,6 @@ import objectAssign from 'object-assign';
 import Spinner from 'react-native-loading-spinner-overlay';
 import * as LayoutActions from './data/layout/actions';
 import Landing from './screens/onboard/Landing';
-import BookingStep from './screens/onboard/Landing/BookingStep';
-import SocialStep from './screens/onboard/Landing/SocialStep';
-import VirtualStep from './screens/onboard/Landing/VirtualStep';
 import Welcome from './screens/onboard/Welcome';
 
 const Root = ({actions, waiting, ...props}) => {
@@ -38,9 +35,6 @@ const Root = ({actions, waiting, ...props}) => {
           visible={!waiting}
         />
         <Switch>
-          <Route path={'/step1'} component={BookingStep} />
-          <Route path={'/step2'} component={SocialStep} />
-          <Route path={'/step3'} component={VirtualStep} />
           <Route path={'/welcome'} component={Welcome} />
           <Route path={'/'} component={Landing} />
         </Switch>

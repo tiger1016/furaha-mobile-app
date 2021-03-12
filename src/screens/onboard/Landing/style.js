@@ -43,12 +43,6 @@ const styles = StyleService.create({
     height: 8,
     width: width / 6,
     borderRadius: 10,
-    backgroundColor: 'color-basic-900',
-  },
-  skipItemActive: {
-    height: 8,
-    width: width / 6,
-    borderRadius: 10,
     backgroundColor: 'color-warning-500',
   },
   icon: {
