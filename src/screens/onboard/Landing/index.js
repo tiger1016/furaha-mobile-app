@@ -250,7 +250,7 @@ const Landing = ({...props}) => {
           <Text style={styles.title} category="h6">
             Furaha Services on the Go
           </Text>
-          <Text style={styles.content} category="p1">
+          <Text category="p1" style={styles.content}>
             Everything that you need to get to make you beautiful and amazing in
             one app. Quick services on the go
           </Text>
